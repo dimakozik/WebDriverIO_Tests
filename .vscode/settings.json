@@ -1,0 +1,18 @@
+{
+    "cucumberautocomplete.steps": [
+        "test/steps/*.js"
+    ],
+    "editor.quickSuggestions": {
+        "comments": false,
+        "strings": true,
+        "other": true
+    },
+    "cucumberautocomplete.syncfeatures": "features/*feature",
+    "cucumberautocomplete.strictGherkinCompletion": true,
+    "cucumberautocomplete.skipDocStringsFormat": true,
+    "cucumberautocomplete.smartSnippets": true,
+    "cucumberautocomplete.stepsInvariants": true,
+    "editor.formatOnType": true,
+    "editor.snippetSuggestions": "inline",
+    "cucumberautocomplete.pages": {}
+}
