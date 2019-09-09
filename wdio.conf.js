@@ -2,7 +2,7 @@
 // Если запуск через скрипт то npm test -- --logLevel=info
 var notifier = require('node-notifier');
 
-var timeout = process.env.DEBUG ? 9999999 : 20000;
+var timeout = process.env.DEBUG ? 9999999 : 60000;
 exports.config = {
 
     user: process.env.SELENIUMUSER,
