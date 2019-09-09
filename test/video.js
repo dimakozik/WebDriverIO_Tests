@@ -8,7 +8,7 @@ browser.addCommand('isVideoPaused', () => {
 
 describe('About us video', () => {
     beforeEach(() => {
-        browser.url('/');
+        browser.url('./');
         browser.click('=About Us'); // wdio locked to a link with text About us 
     });
 

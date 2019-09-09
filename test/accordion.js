@@ -1,7 +1,7 @@
 describe('Accordion', () => {
     var activeClass = 'is-active';
     beforeEach(() => {
-        browser.url('/');
+        browser.url('./');
     })
 
     it('should have active class on first item to start', () => {

@@ -26,7 +26,8 @@ exports.config = {
         './test/**/*.page.js',
         './test/feature/*',
         './test/steps/*',
-        './test/support/**/*.js'
+        './test/support/**/*.js',
+        './test/spyfall.js'
     ],
     //
     // ============

@@ -2,7 +2,7 @@ var cart = require("./cart.page.js");
 
 describe('Cart functionality', () => {
     beforeEach(() => {
-        browser.url("/product-page.html");
+        browser.url("./product-page.html");
     });
 
     it('should only let you buy after setting a quantity', () => {
