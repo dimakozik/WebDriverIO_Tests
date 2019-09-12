@@ -8,7 +8,7 @@ if (process.env.SERVER === "prod") {
     baseUrl = 'http://www.kevinlamping.com/webdriverio-course-content/';
 }
 
-var timeout = process.env.DEBUG ? 9999999 : 20000;
+var timeout = process.env.DEBUG ? 9999999 : 60000;
 exports.config = {
 
     //
