@@ -1,8 +1,24 @@
 // --var=asdasd оr --var="asdasd" оверрайдит ту переменную, которую указали(напр npm ./node_modules/.bin/wdio --logLevel=verbose)
 // Если запуск через скрипт то npm test -- --logLevel=info
+
+var VisualRegressionCompare = require('wdio-visual-regression-service/compare');
+var path = require('path');
+
 var notifier = require('node-notifier');
 
 var timeout = process.env.DEBUG ? 9999999 : 60000;
+
+function getScreenshotName(folder, context) {
+    var type = context.type;
+    var testName = context.test.title;
+    var browserVersion = parseInt(context.browser.version, 10);
+    var browserName = context.browser.name;
+    var browserViewport = context.meta.viewport;
+    var browserWidth = browserViewport.width;
+    var browserHeight = browserViewport.height;
+
+    return path.join(process.cwd(), folder, `${testName}_${type}_${browserName}_v${browserVersion}_${browserWidth}x${browserHeight}.png`);
+}
 exports.config = {
 
     user: process.env.SELENIUMUSER,
@@ -125,7 +141,7 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['selenium-standalone'],//
+    services: ['selenium-standalone', 'visual-regression'],//
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: http://webdriver.io/guide/testrunner/frameworks.html
@@ -134,16 +150,29 @@ exports.config = {
     // before running any tests.
     framework: 'mocha',
     //
+
+    reporterOptions: {
+        junit: {
+            outputDir: './'
+        }
+    },
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: http://webdriver.io/guide/reporters/dot.html
-    reporters: ['dot', 'spec'],
+    reporters: ['dot', 'spec', 'junit'],
     //
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
     mochaOpts: {
         ui: 'bdd',
         timeout: timeout
+    },
+    visualRegression: {
+        compare: new VisualRegressionCompare.LocalCompare({
+            referenceName: getScreenshotName.bind(null, 'screenshots/baseline'),
+            screenshotName: getScreenshotName.bind(null, 'screenshots/latest'),
+            diffName: getScreenshotName.bind(null, 'screenshots/diff')
+        })
     },
     //
     // =====
@@ -159,11 +188,10 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      */
     onPrepare: function (config, capabilities) {
-
-        notifier.notify({
-            title: 'WebdriwerIO',
-            message: 'Test run started'
-        })
+        // notifier.notify({
+        //     title: 'WebdriwerIO',
+        //     message: 'Test run started'
+        // })
     },
     /**
      * Gets executed just before initialising the webdriver session and test framework. It allows you
@@ -220,12 +248,12 @@ exports.config = {
      * @param {Object} test test details
      */
     afterTest: function (test) {
-        if (!test.passed) {
-            notifier.notify({
-                title: 'Test failure',
-                message: test.parent + '' + test.title
-            })
-        }
+        // if (!test.passed) {
+        //     notifier.notify({
+        //         title: 'Test failure',
+        //         message: test.parent + '' + test.title
+        //     })
+        // }
     },
     /**
      * Hook that gets executed after the suite has ended
@@ -267,9 +295,9 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      */
     onComplete: function (exitCode, config, capabilities) {
-        notifier.notify({
-            title: 'WebdriverIO',
-            message: "Tests finished running"
-        })
+        // notifier.notify({
+        //     title: 'WebdriverIO',
+        //     message: "Tests finished running"
+        // })
     }
 }

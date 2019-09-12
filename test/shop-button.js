@@ -6,7 +6,9 @@ describe('shop CTA button', function () {
         // assert.equal(title, "Robot Parts Emporium");
         expect(title).to.equal('Robot Parts Emporium');
 
-        browser.click('.fancy.button.large');
+        browser.checkElement('.shop-callout a');
+
+        browser.click('.shop-callout a');
 
         var productTitle = browser.getTitle();
         // assert.equal(productTitle, "Totally Not Evil Sentient Robot - Robot Parts Emporium");

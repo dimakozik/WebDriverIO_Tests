@@ -31,9 +31,11 @@
     "onchange": "^6.0.0",
     "selenium-standalone": "^6.16.0",
     "sync-request": "^6.1.0",
+    "wdio-junit-reporter": "^0.4.4",
     "wdio-mocha-framework": "^0.6.4",
     "wdio-selenium-standalone-service": "0.0.12",
     "wdio-spec-reporter": "^0.1.5",
+    "wdio-visual-regression-service": "^0.9.0",
     "webdriverio": "^4.14.4"
   }
 }
