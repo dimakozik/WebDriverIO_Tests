@@ -27,7 +27,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "glob": "^7.1.4",
-    "node-notifier": "^5.4.3",
+    "node-notifier": "^8.0.1",
     "onchange": "^6.0.0",
     "selenium-standalone": "^6.16.0",
     "sync-request": "^6.1.0",
